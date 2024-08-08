@@ -12,7 +12,9 @@ server.use(cors());
 server.use(middlewares);
 server.use(auth);
 server.use(router);
+const port = process.env.PORT || 3000;
 
-server.listen(8000, () => {
-  console.log("JSON Server is running");
+// Listen on `port` and 0.0.0.0
+server.listen(port, "0.0.0.0", function () {
+  // ...
 });
