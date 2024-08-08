@@ -1,20 +1,18 @@
 const jsonServer = require("json-server");
+const cors = require("cors");
 const auth = require("json-server-auth");
-const app = jsonServer.create();
+const server = jsonServer.create();
 const router = jsonServer.router("db.json");
 const middlewares = jsonServer.defaults();
-const cors = require("cors");
+
+server.db = router.db;
 
 // تمكين CORS
+server.use(cors());
+server.use(middlewares);
+server.use(auth);
+server.use(router);
 
-const PORT = 4000;
-app.use(cors());
-
-app.db = router.db;
-app.use(middlewares);
-app.use(auth);
-app.use(router);
-app.listen(PORT, () => {
-  console.log("Server is Running");
+server.listen(8000, () => {
+  console.log("JSON Server is running");
 });
-module.exports = app;
