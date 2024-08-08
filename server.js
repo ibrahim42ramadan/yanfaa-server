@@ -3,6 +3,10 @@ const auth = require("json-server-auth");
 const app = jsonServer.create();
 const router = jsonServer.router("db.json");
 const middlewares = jsonServer.defaults();
+const cors = require("cors");
+
+// تمكين CORS
+app.use(cors());
 
 const PORT = 9000;
 app.db = router.db;
